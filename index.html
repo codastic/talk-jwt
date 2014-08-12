@@ -46,15 +46,48 @@
                     <p>
                         <img src="assets/signet_reduced.svg" width="100px" height="100px">
                     </p>
-                    <h1>Main Title</h1>
-                    <p>Much <strong>longer subtitle</strong> with explanation</p>
+                    <h1>JWT</h1>
+                    <p>JSON web token</p>
                     <p>
                         <small>
-                            <a href="http://codastic.com">Firstname Lastname</a> /
-                            Event Name /
-                            1. March 2014
+                            <a href="http://codastic.com">Christian Ranz</a> /
+                            MNUG /
+                            13. August 2014
                         </small>
                     </p>
+                </section>
+
+                <section>
+                    <h2>Server side authentication</h2>
+                    <ul>
+                        <li class="fragment">Cookie based authentication</li>
+                        <li class="fragment">Token based authentication</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Cookie based auth</h2>
+                    <img src="figures/cookie_auth.svg" alt="Cookie based auth flow">
+                </section>
+
+                <section>
+                    <h2>Cookie based API request</h2>
+                    <img src="figures/cookie_api_request.svg" alt="Cookie based api request">
+                </section>
+
+                <section>
+                    <h2>Cookie Drawbacks</h2>
+                    <ul>
+                        <li>hardly works Cross-Domain / CORS</li>
+                        <li>there has to be a state (session) kept on the server</li>
+                        <li>Performance: lookup and deserialize the session</li>
+                        <li>hard to scale</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Token based auth</h2>
+                    <img src="figures/token_auth.svg" alt="Token based auth flow">
                 </section>
 
                 <section>

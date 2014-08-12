@@ -22,9 +22,12 @@
   },
   "dependencies": {
     "underscore": "~1.5.1",
-    "express": "~2.5.9",
     "mustache": "~0.7.2",
-    "socket.io": "~0.9.13"
+    "socket.io": "~0.9.13",
+    "jsonwebtoken": "^0.4.1",
+    "express-jwt": "^0.3.1",
+    "express": "^4.8.3",
+    "body-parser": "^1.6.3"
   },
   "devDependencies": {
     "grunt-contrib-qunit": "~0.2.2",
