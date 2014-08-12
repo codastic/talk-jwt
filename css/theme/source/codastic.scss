@@ -206,6 +206,10 @@ $selectionColor:            $color-white;
 
 // content formatting
 
+.reveal section[data-state="alert"] {
+
+}
+
 .reveal section[data-state="highlight"] {
     color: $color-white;
     -webkit-font-smoothing: antialiased;
@@ -234,4 +238,22 @@ $selectionColor:            $color-white;
             border-bottom-color: rgba($color-black, 0.2);
         }
     }
+}
+
+.jwt {
+
+    word-wrap: break-word;
+
+    &__header {
+        color: #859900;
+    }
+
+    &__claims {
+        color: #268bd2;
+    }
+
+    &__signature {
+        color: #dc322f;
+    }
+
 }

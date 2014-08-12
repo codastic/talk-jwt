@@ -283,3 +283,12 @@ body {
       text-shadow: inherit; }
     .reveal section[data-state="highlight"] a:not(.image):after {
       border-bottom-color: rgba(0, 0, 0, 0.2); }
+
+.jwt {
+  word-wrap: break-word; }
+  .jwt__header {
+    color: #859900; }
+  .jwt__claims {
+    color: #268bd2; }
+  .jwt__signature {
+    color: #dc322f; }
