@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>JWT – JSON Web Token</title>
+
+        <meta name="description" content="Codastic - a web agency offering full stack web application development">
+        <meta name="author" content="Mario Volke &amp; Christian Ranz">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/github.css">
+
+        <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+        <script>
+            if( window.location.search.match( /print-pdf/gi ) ) {
+                var link = document.createElement( 'link' );
+                link.rel = 'stylesheet';
+                link.type = 'text/css';
+                link.href = 'css/print/pdf.css';
+                document.getElementsByTagName( 'head' )[0].appendChild( link );
+            }
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section data-state="highlight">
+                    <p>
+                        <img src="assets/signet_reduced.svg" width="100px" height="100px">
+                    </p>
+                    <h1>JWT</h1>
+                    <p>JSON web token</p>
+                    <p>
+                        <small>
+                            Christian Ranz /
+                            Munich NodeJS User Group /
+                            13. August 2014
+                        </small>
+                    </p>
+                    <p>
+                        <small>
+                            <a href="http://codastic.com">codastic.com</a>
+                        </small>
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Server side authentication</h2>
+                    <p>
+                        There are two ways to perform a server side authentication.
+                    </p>
+                    <ul>
+                        <li class="fragment">Cookie based authentication</li>
+                        <li class="fragment">Token based authentication</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Cookie based auth</h2>
+                    <img src="figures/cookie_auth.svg" alt="Cookie based auth flow">
+                </section>
+
+                <section>
+                    <h2>Cookie based API request</h2>
+                    <img src="figures/cookie_api_request.svg" alt="Cookie based api request">
+                </section>
+
+                <section>
+                    <h2>Cookie Drawbacks</h2>
+                    <ul>
+                        <li class="fragment">hardly works Cross-Domain / CORS</li>
+                        <li class="fragment">there has to be a state (session) kept on the server<br>
+                            → hard to scale</li>
+                        <li class="fragment">lookup and deserialize sessions<br>
+                            → performance issues</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Token based auth</h2>
+                    <img src="figures/token_auth.svg" alt="Token based auth flow">
+                </section>
+
+                <section>
+                    <h2>Token based API request</h2>
+                    <img src="figures/token_api_request.svg" alt="Token based api request">
+                </section>
+
+                <section>
+                    <h2>Token Advantages</h2>
+                    <ul>
+                        <li><strong>Cross-Domain / CORS:</strong><br>The HTTP-Header can be sent to any server</li>
+                        <li><strong>stateless:</strong><br>The token (in case of JWT) contains all information to identify the user</li>
+                        <li><strong>flexible:</strong><br>You don't need cookie containers for mobile applications</li>
+                        <li><strong>performant:</strong><br>There is no server side lookup to find the session on each request</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Decoupling Services</h2>
+                    <img src="figures/decoupling_services.svg" alt="Decoupling Services">
+                </section>
+
+                <section data-state="highlight">
+                    <h1>JWT</h1>
+                    <p>JSON web token</p>
+                </section>
+
+                <section>
+                    <blockquote cite="http://tools.ietf.org/html/draft-ietf-oauth-json-web-token-25">
+                        "JSON Web Token (JWT) is a compact URL-safe means of representing
+                        claims to be transferred between two parties.  The claims in a JWT
+                        are encoded as a JavaScript Object Notation (JSON) object that is
+                        used as the payload of a JSON Web Signature (JWS) structure or as the
+                        plaintext of a JSON Web Encryption (JWE) structure, enabling the
+                        claims to be digitally signed or MACed and/or encrypted."
+                    </blockquote>
+                    <hr>
+                    <p>
+                        <a href="http://tools.ietf.org/html/draft-ietf-oauth-json-web-token-25">IETF JWT draft 25</a>
+                    </p>
+                </section>
+
+                <section>
+                    <h1>JOT?!</h1>
+                </section>
+
+                <section>
+                    <blockquote cite="http://tools.ietf.org/html/draft-ietf-oauth-json-web-token-25">
+                        "The suggested pronunciation of JWT is the same as the English word 'jot'."
+                    </blockquote>
+                    <hr>
+                    <a href="http://tools.ietf.org/html/draft-ietf-oauth-json-web-token-25">IETF JWT</a>
+                </section>
+
+                <section>
+                    <h2>JWT Structure</h2>
+                    <p class="jwt">
+                        <span class="jwt__header">&lt;base64-encoded header&gt;</span>.<span class="jwt__claims">&lt;base64-encoded claims&gt;</span>.<span class="jwt__signature">&lt;base64-encoded signature&gt;</span>
+                    </p>
+                    <hr>
+                    <p>
+                        JW Tokens consist of 3 base64 encoded parts separated by a "."
+                    </p>
+                </section>
+
+                <section>
+                    <p class="jwt">
+                        <span class="jwt__header">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span>.
+                        <span class="jwt__claims">eyJzdWIiOjEsImV4cCI6MTQwNzgyOTI2OCwiaWF0IjoxNDA3ODIyMDY4LCJhZG1pbiI6dHJ1ZX0</span>.
+                        <span class="jwt__signature">JiRQIZojC6DTBM607e1fyxP0bmDSE_STuNxV-f4-7Qk</span>
+                    </p>
+                </section>
+
+                <section>
+                    <h2>JWT Header</h2>
+                    <p class="jwt">
+                        <span class="jwt__header">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span>.
+                        <pre><code class="jwt" data-trim>
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+                        </code></pre>
+                    </p>
+                </section>
+
+                <section>
+                    <ul>
+                        <li><strong>typ:</strong> e.g. "JWT" defines that the encoded Object is a JSON Web Token</li>
+                        <li><strong>alg:</strong> e.g. "HS256" the JWT is a JWS (JSON Web Signature) and HMAC SHA-256 algorithm is used to generate the signature</li>
+                    </ul>
+                    <hr>
+                    <p>
+                        The header can also contain e.g. "enc", "zip" defined in JWE (JSON Web Encryption), ...
+                    </p>
+                </section>
+
+                <section>
+                    <h2>JWT Claims</h2>
+                    <p class="jwt">
+                        <span class="jwt__claims">eyJzdWIiOjEsImV4cCI6MTQwNzgyOTI2OCwiaWF0IjoxNDA3ODIyMDY4LCJhZG1pbiI6dHJ1ZX0</span>.
+                        <pre><code class="jwt" data-trim>
+{
+  "sub": 1,
+  "exp": 1407829268,
+  "iat": 1407822068,
+  "admin": true
+}
+                        </code></pre>
+                    </p>
+                </section>
+
+                <section>
+                    <ul>
+                        <li><strong>iss:</strong> the issuer of the claim</li>
+                        <li><strong>exp:</strong> the UTC Unix time the token was issued at</li>
+                        <li><strong>iat:</strong> the UTC Unix time when the token expires</li>
+                        <li><strong>jti:</strong> a unique identifier for the JWT</li>
+                        <li><strong>sub:</strong> The subject of this token. e.g. the users id</li>
+                    </ul>
+                    <hr>
+                    <p>
+                        There can be custom claims too. But you have to keep in mind that the token is sent to the server on each request, so ...
+                    </p>
+                </section>
+
+                <section>
+                    <h1>watch your token length!</h1>
+                </section>
+
+                <section>
+                    <h2>JWT Signature</h2>
+                    <p class="jwt">
+                        <span class="jwt__signature">JiRQIZojC6DTBM607e1fyxP0bmDSE_STuNxV-f4-7Qk</span>
+                        <pre><code class="jwt" data-trim>
+HMACSHA256(
+    base64UrlEncode(header) + "." +
+    base64UrlEncode(payload),
+    "supersafe_secret"
+)
+                        </code></pre>
+                    </p>
+                </section>
+
+                <section>
+                    <p>
+                        A signature generated using an algorithm specified in <a href="http://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31#section-3">JWA (JSON Web Algorithms)</a>
+                    </p>
+                    <hr>
+                    <ul>
+                        <li>"HS256" HMAC using SHA-256</li>
+                        <li>"RS256" RSASSA-PKCS-v1_5 using SHA-256</li>
+                        <li>etc.</li>
+                    </ul>
+                </section>
+
+                <section data-state="highlight">
+                    <h2>Working with JWT</h2>
+                </section>
+
+                <section>
+                    <h2>Example: JWT, node.js, express.js</h2>
+                </section>
+
+                <section>
+                    <h2>Invalidation and Expiry</h2>
+                    <ul>
+                        <li>just remove the token from the client</li>
+                        <li>A Token blacklist</li>
+                        <li>keep expiry times short</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Token Expiration</h2>
+                    <img src="figures/token_expire.svg" alt="Token Expiration">
+                </section>
+
+                <section>
+                    <h2>Token Invalidation</h2>
+                    <img src="figures/token_logout.svg" alt="Token Logout">
+                </section>
+
+                <section>
+                    <h2>Further Reading</h2>
+                    <ul>
+                        <li><a href="http://tools.ietf.org/html/draft-ietf-oauth-json-web-token-25">IETF JWT (JSON Web Token) draft</a></li>
+                        <li><a href="http://tools.ietf.org/html/draft-ietf-jose-json-web-signature-31">IETF JWS (JSON Web Signature) draft</a></li>
+                        <li><a href="http://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31">IETF JWA (JSON Web Algorithms) draft</a></li>
+                        <li><a href="http://jwt.io">jwt.io</a> nice overview on JWT libs and a token debugger</li>
+                        <li><a href="https://github.com/auth0/express-jwt">express-jwt</a> a express JWT middleware by <a href="https://auth0.com/">Auth0</a></li>
+                        <li><a href="https://github.com/auth0/node-jsonwebtoken">node-jsonwebtoken</a> a node JWT implementation by <a href="https://auth0.com/">Auth0</a></li>
+                        <li><a href="https://github.com/brianloveswords/node-jwa">node-jwa</a> a JSON Web Algorithms implementation by <a href="http://bjb.io">Brian J Brennan</a></li>
+                        <li><a href="https://github.com/brianloveswords/node-jws">node-jws</a> a JSON Web Signature implementation by <a href="http://bjb.io">Brian J Brennan</a></li>
+                        <li><a href="https://auth0.com/blog/">Auth0 Blog</a> some good articles about JWT</li>
+                    </ul>
+                </section>
+
+                <section data-state="highlight">
+                    <p><strong>&lt;/end&gt;</strong></p>
+                    <h1>Questions?</h1>
+                    <p>by Christian Ranz</p>
+                </section>
+
+            </div>
+
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                theme: 'codastic',
+                transition: 'concave', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,255 @@
+/**
+ * Codastic theme for reveal.js.
+ *
+ * Copyright (C) 2014 Mario Volke, http://codastic.com
+ */
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+// Include theme-specific fonts
+@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700);
+
+// Codastic colors
+$color-black:               #000;
+$color-white:               #fff;
+$color-green:               #66cc33;
+$color-gray-darkest:        #1b1b1b;
+$color-gray-dark:           #252525;
+$color-gray:                #333;
+$color-gray-light:          #ababab;
+$color-gray-lighter:        #666666;
+$color-gray-lightest:       #f7f7f7;
+$color-red:                 #e0554b;
+
+// Override theme settings (see ../template/settings.scss)
+$mainFont:                  "Open Sans", Helvetica, Arial, sans-serif;
+$mainColor:                 $color-gray;
+$headingFont:               "Open Sans", Helvetica, Arial, sans-serif;
+$headingColor:              $color-gray;
+$headingLineHeight:         1em;
+$headingLetterSpacing:      inherit;
+$headingTextTransform:      none;
+$headingTextShadow:         none;
+$backgroundColor:           $color-white;
+$linkColor:                 $color-black;
+$linkColorHover:            $color-black;
+$selectionBackgroundColor:  $color-green;
+$selectionColor:            $color-white;
+
+@mixin bodyBackground() {
+    background: $backgroundColor;
+    &:after {
+        display: block;
+        content: url(../../assets/signet_light.svg);
+        width: 12em;
+        height: 12em;
+        max-width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        transform: translate(-42%, 42%);
+        transition: transform 0.3s ease-out;
+    }
+}
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
+
+// Theme overrides and additions
+// ---------------------------------------------
+
+
+.reveal a:not(.image) {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+
+    &:after {
+        position: absolute;
+        bottom: -0.05em;
+        left: 0;
+        width: 100%;
+        content: '';
+        display: block;
+        border-bottom: 0.1em solid $color-green;
+        height: 0;
+        transform: scaleX(1);
+        transition: transform 0.3s ease;
+        z-index: -1;
+    }
+    &:hover, &:focus {
+        &:after {
+            transform: scaleX(0.8);
+        }
+    }
+}
+
+.reveal .controls div.navigate-left,
+.reveal .controls div.navigate-right,
+.reveal .controls div.navigate-up,
+.reveal .controls div.navigate-down {
+    opacity: 0.2;
+    &.enabled {
+        opacity: 0.8;
+    }
+    &.enabled:hover {
+        opacity: 1;
+    }
+}
+.reveal .controls div.navigate-left {
+    border-right-color: $color-black;
+}
+.reveal .controls div.navigate-right{
+    border-left-color: $color-black;
+}
+.reveal .controls div.navigate-up {
+    border-bottom-color: $color-black;
+}
+.reveal .controls div.navigate-down{
+    border-top-color: $color-black;
+}
+.reveal .controls div.navigate-left.enabled,
+.reveal .controls div.navigate-left.enabled:hover {
+    border-right-color: $color-green;
+}
+.reveal .controls div.navigate-right.enabled,
+.reveal .controls div.navigate-right.enabled:hover {
+    border-left-color: $color-green;
+}
+.reveal .controls div.navigate-up.enabled,
+.reveal .controls div.navigate-up.enabled:hover {
+    border-bottom-color: $color-green;
+}
+.reveal .controls div.navigate-down.enabled,
+.reveal .controls div.navigate-down.enabled:hover {
+    border-top-color: $color-green;
+}
+
+.reveal .progress span {
+    background: $color-green;
+}
+
+.reveal section img {
+    border: 0;
+    box-shadow: none;
+    background: none;
+}
+
+.reveal {
+    letter-spacing: inherit;
+    font-size: 32px;
+
+    pre {
+        border: 4px solid $color-green;
+        box-shadow: none;
+        margin: 20px auto;
+        font-family: "Ubuntu Mono", monospace;
+        width: 100%;
+        code {
+            padding: 20px;
+        }
+    }
+
+    ul, ol, dl {
+        margin-bottom: 10px;
+    }
+
+    hr {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: 50%;
+        height: 0;
+        border: 0;
+        border-top: 1px solid rgba($color-black, 0.1);
+    }
+}
+
+/* Highlight state
+ * ------------------------------------
+ * For highlight state put data-state="highlight" on the slide.
+ */
+
+.highlight {
+    body:after {
+        transform: translate(-100%, 100%);
+    }
+    .state-background {
+        background-color: $color-green;
+    }
+
+    .reveal .controls div.navigate-left.enabled,
+    .reveal .controls div.navigate-left.enabled:hover {
+        border-right-color: $color-white;
+    }
+    .reveal .controls div.navigate-right.enabled,
+    .reveal .controls div.navigate-right.enabled:hover {
+        border-left-color: $color-white;
+    }
+    .reveal .controls div.navigate-up.enabled,
+    .reveal .controls div.navigate-up.enabled:hover {
+        border-bottom-color: $color-white;
+    }
+    .reveal .controls div.navigate-down.enabled,
+    .reveal .controls div.navigate-down.enabled:hover {
+        border-top-color: $color-white;
+    }
+
+    .reveal .progress span {
+        background: $color-white;
+    }
+}
+
+// content formatting
+
+.reveal section[data-state="highlight"] {
+    color: $color-white;
+    -webkit-font-smoothing: antialiased;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+    font-style: italic;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: $color-white;
+        text-transform: capitalize;
+        text-shadow: inherit;
+        font-style: normal;
+        font-weight: 600;
+    }
+
+    a:not(.image) {
+        color: $color-white;
+        &:hover {
+            text-shadow: inherit;
+        }
+        &:after {
+            border-bottom-color: rgba($color-black, 0.2);
+        }
+    }
+}
+
+.jwt {
+
+    word-wrap: break-word;
+
+    &__header {
+        color: #859900;
+    }
+
+    &__claims {
+        color: #268bd2;
+    }
+
+    &__signature {
+        color: #dc322f;
+    }
+
+}
