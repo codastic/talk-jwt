@@ -146,9 +146,6 @@ body {
 .reveal .slide-number {
   color: black; }
 
-.reveal {
-  letter-spacing: inherit; }
-
 .reveal a:not(.image) {
   position: relative;
   display: inline-block;
@@ -220,14 +217,26 @@ body {
   box-shadow: none;
   background: none; }
 
-.reveal pre {
-  border: 4px solid #66cc33;
-  box-shadow: none;
-  margin: 20px auto;
-  font-family: "Ubuntu Mono", monospace;
-  width: 100%; }
-  .reveal pre code {
-    padding: 20px; }
+.reveal {
+  letter-spacing: inherit;
+  font-size: 32px; }
+  .reveal pre {
+    border: 4px solid #66cc33;
+    box-shadow: none;
+    margin: 20px auto;
+    font-family: "Ubuntu Mono", monospace;
+    width: 100%; }
+    .reveal pre code {
+      padding: 20px; }
+  .reveal ul, .reveal ol, .reveal dl {
+    margin-bottom: 10px; }
+  .reveal hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 50%;
+    height: 0;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1); }
 
 /* Highlight state
  * ------------------------------------

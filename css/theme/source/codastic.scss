@@ -63,9 +63,6 @@ $selectionColor:            $color-white;
 // Theme overrides and additions
 // ---------------------------------------------
 
-.reveal {
-    letter-spacing: inherit;
-}
 
 .reveal a:not(.image) {
     position: relative;
@@ -143,14 +140,32 @@ $selectionColor:            $color-white;
     background: none;
 }
 
-.reveal pre {
-    border: 4px solid $color-green;
-    box-shadow: none;
-    margin: 20px auto;
-    font-family: "Ubuntu Mono", monospace;
-    width: 100%;
-    code {
-        padding: 20px;
+.reveal {
+    letter-spacing: inherit;
+    font-size: 32px;
+
+    pre {
+        border: 4px solid $color-green;
+        box-shadow: none;
+        margin: 20px auto;
+        font-family: "Ubuntu Mono", monospace;
+        width: 100%;
+        code {
+            padding: 20px;
+        }
+    }
+
+    ul, ol, dl {
+        margin-bottom: 10px;
+    }
+
+    hr {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: 50%;
+        height: 0;
+        border: 0;
+        border-top: 1px solid rgba($color-black, 0.1);
     }
 }
 
