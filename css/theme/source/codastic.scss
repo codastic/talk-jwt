@@ -167,6 +167,13 @@ $selectionColor:            $color-white;
         border: 0;
         border-top: 1px solid rgba($color-black, 0.1);
     }
+
+    .highlighted {
+        font-weight: 300;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: .08em;
+    }
 }
 
 /* Highlight state
@@ -234,22 +241,4 @@ $selectionColor:            $color-white;
             border-bottom-color: rgba($color-black, 0.2);
         }
     }
-}
-
-.jwt {
-
-    word-wrap: break-word;
-
-    &__header {
-        color: #859900;
-    }
-
-    &__claims {
-        color: #268bd2;
-    }
-
-    &__signature {
-        color: #dc322f;
-    }
-
 }
