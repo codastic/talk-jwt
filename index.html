@@ -108,7 +108,7 @@
                     <h2>Token Advantages</h2>
                     <ul>
                         <li><strong>Cross-Domain / CORS:</strong><br>The HTTP-Header can be sent to any server</li>
-                        <li><strong>stateless:</strong><br>The token (in case of JWT) contains all information to identify the user</li>
+                        <li><strong>stateless:</strong><br>The [signed] token (in case of JWT) contains all information to identify the user</li>
                         <li><strong>flexible:</strong><br>You don't need cookie containers for mobile applications</li>
                         <li><strong>performant:</strong><br>There is no server side lookup to find the session on each request</li>
                     </ul>
@@ -212,7 +212,7 @@
                 <section>
                     <ul>
                         <li><strong>iss:</strong> the issuer of the claim</li>
-                        <li><strong>exp:</strong> the UTC Unix time the token was issued at</li>
+                        <li><strong>exp:</strong> the UTC Unix time where the token was issued at</li>
                         <li><strong>iat:</strong> the UTC Unix time when the token expires</li>
                         <li><strong>jti:</strong> a unique identifier for the JWT</li>
                         <li><strong>sub:</strong> The subject of this token. e.g. the users id</li>
@@ -287,7 +287,7 @@ HMACSHA256(
                         <li><a href="http://tools.ietf.org/html/draft-ietf-jose-json-web-signature-31">IETF JWS (JSON Web Signature) draft</a></li>
                         <li><a href="http://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31">IETF JWA (JSON Web Algorithms) draft</a></li>
                         <li><a href="http://jwt.io">jwt.io</a> nice overview on JWT libs and a token debugger</li>
-                        <li><a href="https://github.com/auth0/express-jwt">express-jwt</a> a express JWT middleware by <a href="https://auth0.com/">Auth0</a></li>
+                        <li><a href="https://github.com/auth0/express-jwt">express-jwt</a> an express JWT middleware by <a href="https://auth0.com/">Auth0</a></li>
                         <li><a href="https://github.com/auth0/node-jsonwebtoken">node-jsonwebtoken</a> a node JWT implementation by <a href="https://auth0.com/">Auth0</a></li>
                         <li><a href="https://github.com/brianloveswords/node-jwa">node-jwa</a> a JSON Web Algorithms implementation by <a href="http://bjb.io">Brian J Brennan</a></li>
                         <li><a href="https://github.com/brianloveswords/node-jws">node-jws</a> a JSON Web Signature implementation by <a href="http://bjb.io">Brian J Brennan</a></li>
