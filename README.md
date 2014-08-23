@@ -5,7 +5,7 @@ URL-safe token structure enabling the transfer of claims between two
 parties. A JWT can be digitally signed, MACed and/or encryped to prevent
 tempering.
 
-(Video MNUG 2014.08.13 - Lightning talk: JWT: Jason Web Token)[https://www.youtube.com/watch?v=eWUkxzyB1Rk]
+[Video MNUG 2014.08.13 - Lightning talk: JWT: Jason Web Token](https://www.youtube.com/watch?v=eWUkxzyB1Rk)
 
 # reveal.js [![Build Status](https://travis-ci.org/hakimel/reveal.js.png?branch=master)](https://travis-ci.org/hakimel/reveal.js)
 
